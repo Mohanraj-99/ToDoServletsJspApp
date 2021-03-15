@@ -51,15 +51,6 @@
             </tr>
 
             <tr>
-                <td><label>Status:</label></td>
-                <td>
-                    <label>
-                        <input type="text" name="status" />
-                    </label>
-                </td>
-            </tr>
-
-            <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Save" class="save" /></td>
             </tr>

@@ -84,7 +84,7 @@ public class TodoDao  {
                 String description = myRs.getString("description");
                 String status = myRs.getString("status");
 
-                // use the studentId during construction
+                // use the todoId during construction
                 todo = new Todo (id, topic, description, status);
             }
             else {

@@ -7,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/ToDoServlet")
@@ -44,6 +43,9 @@ public class ToDoServlet extends HttpServlet {
                 case "DELETE":
                     deleteTodo(request, response);
                     break;
+                case "COMPLETE":
+                    setCompleteStatus(request,response);
+                    break;
 
                 default:
                     listTodos(request, response);
@@ -52,6 +54,20 @@ public class ToDoServlet extends HttpServlet {
         } catch (Exception exc) {
             throw new ServletException(exc);
         }
+
+    }
+
+    private void setCompleteStatus(HttpServletRequest request, HttpServletResponse response)
+            throws Exception  {
+        // onClick - to status change
+        Todo todo = TodoDao.getTodo(request.getParameter("todoID"));
+        todo.setStatus("Completed");
+
+        // perform update on database
+        TodoDao.updateTodo(todo);
+
+        // send them back to the "list todos" page
+        listTodos(request, response);
 
     }
 
@@ -84,7 +100,7 @@ public class ToDoServlet extends HttpServlet {
         // perform update on database
         TodoDao.updateTodo(todo);
 
-        // send them back to the "list students" page
+        // send them back to the "list todos" page
         listTodos(request, response);
 
     }
@@ -112,10 +128,9 @@ public class ToDoServlet extends HttpServlet {
         // read todo info from form data
         String topic = request.getParameter("topic");
         String description = request.getParameter("description");
-        String status = request.getParameter("status");
 
         // create a new todo object
-        Todo todo = new Todo(topic, description, status);
+        Todo todo = new Todo(topic, description, "Incomplete");
 
         // add the todo to the database
         TodoDao.addTodo(todo);

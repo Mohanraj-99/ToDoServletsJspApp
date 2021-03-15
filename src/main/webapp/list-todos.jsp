@@ -32,7 +32,7 @@
 
         <input type="button" value="Add Todo"
                onclick="window.location.href='add-todo-form.jsp'; return false;"
-               class="add-student-button"
+               class="add-todo-button"
         />
 
         <table>
@@ -46,15 +46,21 @@
 
             <c:forEach var="temp" items="${TODO_LIST}">
 
-                <!-- set up a link for each student -->
+                <!-- set up a link for each todo -->
                 <c:url var="tempLink" value="ToDoServlet">
                     <c:param name="command" value="LOAD" />
                     <c:param name="todoID" value="${temp.id}" />
                 </c:url>
 
-                <!--  set up a link to delete a student -->
+                <!--  set up a link to delete a todo -->
                 <c:url var="deleteLink" value="ToDoServlet">
                     <c:param name="command" value="DELETE" />
+                    <c:param name="todoID" value="${temp.id}" />
+                </c:url>
+
+                <!-- set up a link to mark complete -->
+                <c:url var="completeLink" value="ToDoServlet">
+                    <c:param name="command" value="COMPLETE" />
                     <c:param name="todoID" value="${temp.id}" />
                 </c:url>
 
@@ -68,6 +74,8 @@
                         <a href="${deleteLink}"
                            onclick="if (!(confirm('Are you sure you want to delete this todo?'))) return false">
                             Delete</a>
+                        |
+                        <a href="${completeLink}">Completed</a>
                     </td>
                 </tr>
 
