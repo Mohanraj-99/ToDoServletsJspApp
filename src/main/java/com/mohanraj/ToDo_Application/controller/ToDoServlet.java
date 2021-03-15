@@ -58,27 +58,27 @@ public class ToDoServlet extends HttpServlet {
     private void deleteTodo(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        // read student id from form data
+        // read todo id from form data
         String todoID = request.getParameter("todoID");
 
-        // delete student from database
+        // delete todo from database
         TodoDao.deleteTodo(todoID);
 
-        // send them back to "list students" page
+        // send them back to "list todo" page
         listTodos(request, response);
     }
 
     private void updateTodo(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        // read student info from form data
+        // read todo info from form data
         int id = Integer.parseInt(request.getParameter("id"));
         String topic = request.getParameter("topic");
         String description = request.getParameter("description");
         String status = request.getParameter("status");
 
 
-        // create a new student object
+        // create a new todo object
         Todo todo = new Todo(id, topic, description, status);
 
         // perform update on database
@@ -92,13 +92,13 @@ public class ToDoServlet extends HttpServlet {
     private void loadTodo(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        // read student id from form data
+        // read todo id from form data
         String id = request.getParameter("todoID");
 
-        // get student from database (db util)
+        // get todo from database (db util)
         Todo todo = TodoDao.getTodo(id);
 
-        // place student in the request attribute
+        // place todo in the request attribute
         request.setAttribute("theTodo", todo);
 
         // send to jsp page: update-todo-form.jsp
@@ -109,28 +109,28 @@ public class ToDoServlet extends HttpServlet {
 
     private void addTodo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        // read student info from form data
+        // read todo info from form data
         String topic = request.getParameter("topic");
         String description = request.getParameter("description");
         String status = request.getParameter("status");
 
-        // create a new student object
+        // create a new todo object
         Todo todo = new Todo(topic, description, status);
 
-        // add the student to the database
+        // add the todo to the database
         TodoDao.addTodo(todo);
 
-        // send back to main page (the student list)
+        // send back to main page (the todo list)
         listTodos(request, response);
     }
 
     private void listTodos(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        // get students from db util
+        // get todos from db util
         List<Todo> todos = TodoDao.getTodos();
 
-        // add students to the request
+        // add todo to the request
         request.setAttribute("TODO_LIST", todos);
 
         // send to JSP page (view)

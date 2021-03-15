@@ -13,7 +13,7 @@
     <title>Add Todo</title>
 
     <link type="text/css" rel="stylesheet" href="css/style.css">
-    <link type="text/css" rel="stylesheet" href="css/add-student-style.css">
+    <link type="text/css" rel="stylesheet" href="css/add-todo-style.css">
 </head>
 
 <body>

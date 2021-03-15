@@ -126,10 +126,10 @@ public class TodoDao  {
                 String description = myRs.getString("description");
                 String status = myRs.getString("status");
 
-                // create new student object
+                // create new todo object
                 todo = new Todo(id, topic, description, status);
 
-                // add it to the list of students
+                // add it to the list of todos
                 todos.add(todo);
             }
             return todos;
