@@ -1,2 +1,2 @@
-# ToDoApp
+# ToDoServletsJspApp
  Servlets and JSP
