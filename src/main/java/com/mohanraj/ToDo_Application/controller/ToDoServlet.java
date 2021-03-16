@@ -1,19 +1,19 @@
 package com.mohanraj.ToDo_Application.controller;
 
+import com.mohanraj.ToDo_Application.dao.SubTodoDao;
 import com.mohanraj.ToDo_Application.dao.TodoDao;
 import com.mohanraj.ToDo_Application.model.Todo;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/ToDoServlet")
 public class ToDoServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         try {
             // read the "command" parameter
@@ -60,11 +60,17 @@ public class ToDoServlet extends HttpServlet {
     private void setCompleteStatus(HttpServletRequest request, HttpServletResponse response)
             throws Exception  {
         // onClick - to status change
-        Todo todo = TodoDao.getTodo(request.getParameter("todoID"));
+        String todoID = request.getParameter("todoID");
+        Todo todo = TodoDao.getTodo(todoID);
         todo.setStatus("Completed");
 
         // perform update on database
         TodoDao.updateTodo(todo);
+
+        // make their subtodos(group) to complete
+        if(todo.getType().equals("group")){
+            SubTodoDao.completeUpdateSubTodos(todoID);
+        }
 
         // send them back to the "list todos" page
         listTodos(request, response);
@@ -76,6 +82,12 @@ public class ToDoServlet extends HttpServlet {
 
         // read todo id from form data
         String todoID = request.getParameter("todoID");
+        Todo todo = TodoDao.getTodo(todoID);
+
+        // delete all subtodos(if group)
+        if(todo.getType().equals("group")){
+            SubTodoDao.deleteAllSubTodoById(todoID);
+        }
 
         // delete todo from database
         TodoDao.deleteTodo(todoID);
@@ -90,12 +102,12 @@ public class ToDoServlet extends HttpServlet {
         // read todo info from form data
         int id = Integer.parseInt(request.getParameter("id"));
         String topic = request.getParameter("topic");
+        String type = request.getParameter("type");
         String description = request.getParameter("description");
         String status = request.getParameter("status");
 
-
         // create a new todo object
-        Todo todo = new Todo(id, topic, description, status);
+        Todo todo = new Todo(id, topic,type, description, status);
 
         // perform update on database
         TodoDao.updateTodo(todo);
@@ -128,9 +140,10 @@ public class ToDoServlet extends HttpServlet {
         // read todo info from form data
         String topic = request.getParameter("topic");
         String description = request.getParameter("description");
+        String type = request.getParameter("type");
 
         // create a new todo object
-        Todo todo = new Todo(topic, description, "Incomplete");
+        Todo todo = new Todo(topic, type, description, "Incomplete");
 
         // add the todo to the database
         TodoDao.addTodo(todo);

@@ -40,6 +40,7 @@
                     </label>
                 </td>
             </tr>
+            </tr>
 
             <tr>
                 <td><label>Description:</label></td>
@@ -47,6 +48,16 @@
                     <label>
                         <input type="text" name="description" />
                     </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>Type:</label></td>
+                <td>
+                    <select name="type">
+                        <option value="single" selected>single</option>
+                        <option value="group">group</option>
+                    </select>
                 </td>
             </tr>
 

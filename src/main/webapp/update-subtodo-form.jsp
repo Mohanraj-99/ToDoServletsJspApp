@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Mohanraj G
   Date: 15-03-2021
-  Time: 07:48
+  Time: 13:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,7 +10,7 @@
 <html>
 
 <head>
-    <title>Update Todo</title>
+    <title>Update Sub-Todo</title>
 
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link type="text/css" rel="stylesheet" href="css/add-todo-style.css">
@@ -19,37 +19,27 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <h2>TODO APPLICATION</h2>
+        <h2>SUB-TODO APPLICATION</h2>
     </div>
 </div>
 
 <div id="container">
-    <h3>Update Todo</h3>
+    <h3>Update Sub-Todo</h3>
 
-    <form action="ToDoServlet" method="GET">
+    <form action="SubServlet" method="GET">
 
         <input type="hidden" name="command" value="UPDATE" />
 
-        <input type="hidden" name="id" value="${theTodo.id}" />
+        <input type="hidden" name="id" value="${theSubTodo.id}" />
 
         <table>
             <tbody>
             <tr>
-                <td><label>Topic:</label></td>
+                <td><label>Sub Topic:</label></td>
                 <td>
                     <label>
-                        <input type="text" name="topic"
-                               value="${theTodo.topic}" />
-                    </label>
-                </td>
-            </tr>
-
-            <tr>
-                <td><label>Type:</label></td>
-                <td>
-                    <label>
-                        <input type="text" name="type"
-                               value="${theTodo.type}" />
+                        <input type="text" name="subtopic"
+                               value="${theSubTodo.subTopic}" />
                     </label>
                 </td>
             </tr>
@@ -59,7 +49,7 @@
                 <td>
                     <label>
                         <input type="text" name="description"
-                               value="${theTodo.description}" />
+                               value="${theSubTodo.description}" />
                     </label>
                 </td>
             </tr>
@@ -69,7 +59,7 @@
                 <td>
                     <label>
                         <input type="text" name="status"
-                               value="${theTodo.status}" />
+                               value="${theSubTodo.status}" />
                     </label>
                 </td>
             </tr>

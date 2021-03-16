@@ -1,25 +1,25 @@
 package com.mohanraj.ToDo_Application.model;
 
-import java.io.Serializable;
+public class Todo  {
 
-public class Todo implements Serializable {
-
-    private static final long serialVersionUID = 1L;
     private int id;
     private String topic;
+    private String type;
     private String description;
     private String status;
 
-    public Todo(String topic, String description, String status) {
+    public Todo(String topic,String type, String description, String status) {
         super();
         this.topic = topic;
+        this.type = type;
         this.description = description;
         this.status = status;
     }
 
-    public Todo(int id, String topic, String description, String status) {
+    public Todo(int id, String topic, String type,String description, String status) {
         this.id = id;
         this.topic = topic;
+        this.type = type;
         this.description = description;
         this.status = status;
     }
@@ -30,6 +30,14 @@ public class Todo implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getTopic() {
